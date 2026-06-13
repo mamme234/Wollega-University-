@@ -2,13 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,22 +12,20 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from current directory (so index.html is accessible)
-app.use(express.static(__dirname));
-
-// MongoDB News Model
+// MongoDB Schema
 const newsSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  summary: String,
+  summary: { type: String, required: true },
   date: { type: Date, default: Date.now },
-}, { timestamps: true });
+  category: { type: String, default: 'General' }
+});
 
 const News = mongoose.model('News', newsSchema);
 
 // API Routes
 app.get('/api/news', async (req, res) => {
   try {
-    const news = await News.find().sort({ date: -1 }).limit(6);
+    const news = await News.find().sort({ date: -1 }).limit(10);
     res.json(news);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -41,18 +34,64 @@ app.get('/api/news', async (req, res) => {
 
 app.post('/api/news', async (req, res) => {
   try {
-    const newNews = new News(req.body);
-    await newNews.save();
-    res.status(201).json(newNews);
+    const news = new News(req.body);
+    await news.save();
+    res.status(201).json(news);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
+// Health check for Render
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Backend is running' });
+});
+
 // Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
+  .then(async () => {
     console.log('✅ MongoDB connected');
-    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+    
+    // Pre-load sample news if database is empty
+    const existingNews = await News.countDocuments();
+    if (existingNews === 0) {
+      console.log('📝 Adding sample news...');
+      const sampleNews = [
+        {
+          title: '🎓 Wollega University Launches Ultra Edition',
+          summary: 'Our new modern platform features real-time updates and responsive design.',
+          category: 'Announcement'
+        },
+        {
+          title: '🔬 New AI Research Center Opens',
+          summary: 'State-of-the-art facility to drive technological innovation in Ethiopia.',
+          category: 'Research'
+        },
+        {
+          title: '🏆 Ranked Top 5 Universities in Ethiopia',
+          summary: 'Recognized for academic excellence and research output.',
+          category: 'Achievement'
+        },
+        {
+          title: '🌍 International Exchange Program 2026',
+          summary: 'Apply now for semester abroad opportunities in Europe and Asia.',
+          category: 'Opportunity'
+        },
+        {
+          title: '💻 Free Digital Skills Bootcamp',
+          summary: 'Learn web development and data science. Limited spots available!',
+          category: 'Event'
+        }
+      ];
+      await News.insertMany(sampleNews);
+      console.log(`✅ Added ${sampleNews.length} sample articles`);
+    }
+    
+    app.listen(PORT, () => {
+      console.log(`🚀 Backend running on port ${PORT}`);
+    });
   })
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('❌ MongoDB error:', err);
+    process.exit(1);
+  });
