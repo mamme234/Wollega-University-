@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wollega University | Ultra Edition</title>
+  <title>Wollega University | Ultra Edition – Complete University Website</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -16,8 +17,10 @@
       font-family: 'Inter', sans-serif;
       background: #f8fafc;
       color: #0f172a;
+      line-height: 1.6;
     }
 
+    /* Navbar */
     .navbar {
       position: sticky;
       top: 0;
@@ -40,17 +43,19 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
+      cursor: pointer;
     }
 
     .logo p {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: #475569;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.2rem;
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -58,12 +63,30 @@
       font-weight: 600;
       color: #1e293b;
       transition: 0.3s;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
 
     .nav-links a:hover {
       color: #2b7a4b;
     }
 
+    /* Page Sections */
+    .page-section {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Section */
     .hero {
       background: linear-gradient(135deg, #1e3c72 0%, #2b7a4b 100%);
       color: white;
@@ -72,7 +95,7 @@
     }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
     }
 
@@ -80,7 +103,6 @@
       font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto;
-      opacity: 0.95;
     }
 
     .btn-primary {
@@ -93,6 +115,8 @@
       border-radius: 50px;
       font-weight: 600;
       transition: 0.3s;
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary:hover {
@@ -100,86 +124,71 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
-    .news-section {
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: #2b7a4b;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-secondary:hover {
+      background: #1e5a3a;
+    }
+
+    /* Container */
+    .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
 
     .section-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       text-align: center;
       margin-bottom: 3rem;
-      color: #0f172a;
+      color: #1e3c72;
     }
 
-    .news-grid {
+    /* Grids */
+    .grid-3, .grid-4 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
 
-    .news-card {
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    .card {
       background: white;
+      padding: 1.5rem;
       border-radius: 1rem;
-      overflow: hidden;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       transition: 0.3s;
     }
 
-    .news-card:hover {
+    .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     }
 
-    .news-content {
-      padding: 1.5rem;
-    }
-
-    .news-category {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background: #e0e7ff;
-      color: #4338ca;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .news-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-      color: #0f172a;
-    }
-
-    .news-summary {
-      color: #475569;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .news-date {
-      font-size: 0.8rem;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 3rem;
-      font-size: 1.2rem;
+    .card h3 {
       color: #2b7a4b;
+      margin-bottom: 0.5rem;
     }
 
-    .error {
-      text-align: center;
-      padding: 3rem;
-      color: #dc2626;
+    .card i {
+      font-size: 2rem;
+      color: #2b7a4b;
+      margin-bottom: 1rem;
     }
 
+    /* Stats */
     .stats {
       background: #1e293b;
       color: white;
@@ -196,137 +205,361 @@
       color: #60a5fa;
     }
 
+    /* News Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-category {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #e0e7ff;
+      color: #4338ca;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
     footer {
       background: #0f172a;
       color: #94a3b8;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-grid h4 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-grid a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #1e293b;
+    }
+
+    .loading {
       text-align: center;
       padding: 2rem;
     }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .navbar {
-        flex-direction: column;
-        text-align: center;
-      }
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
+      .hero h1 { font-size: 2rem; }
+      .navbar { flex-direction: column; text-align: center; }
+      .nav-links { justify-content: center; }
+      .section-title { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <div class="logo">
+  <div class="logo" onclick="showPage('home')">
     <h1>Wollega University</h1>
     <p>Ultra Edition | Excellence in Education</p>
   </div>
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Academics</a></li>
-    <li><a href="#">Admissions</a></li>
-    <li><a href="#">Research</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('academics')">Academics</a></li>
+    <li><a onclick="showPage('admissions')">Admissions</a></li>
+    <li><a onclick="showPage('research')">Research</a></li>
+    <li><a onclick="showPage('campus')">Campus Life</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
   </ul>
 </nav>
 
-<section class="hero">
-  <h1>Shape Your Future at Wollega University</h1>
-  <p>Experience world-class education, cutting-edge research, and a vibrant campus life in the heart of Ethiopia.</p>
-  <a href="#" class="btn-primary">Apply Now →</a>
-</section>
+<!-- ==================== HOME PAGE ==================== -->
+<div id="homePage" class="page-section active">
+  <section class="hero">
+    <h1>Shape Your Future at Wollega University</h1>
+    <p>World-class education, cutting-edge research, and vibrant campus life in Ethiopia</p>
+    <button class="btn-primary" onclick="showPage('admissions')">Apply Now →</button>
+  </section>
 
-<section class="news-section">
-  <h2 class="section-title">📰 Latest News & Updates</h2>
-  <div id="newsGrid" class="news-grid">
-    <div class="loading">Loading latest news from MongoDB...</div>
+  <div class="container">
+    <h2 class="section-title">📰 Latest News</h2>
+    <div id="newsGrid" class="news-grid">
+      <div class="loading">Loading news...</div>
+    </div>
   </div>
-</section>
 
-<section class="stats">
-  <div>
-    <div class="stat-number">10,000+</div>
-    <div>Students</div>
+  <section class="stats">
+    <div><div class="stat-number">12,000+</div><div>Students</div></div>
+    <div><div class="stat-number">600+</div><div>Faculty</div></div>
+    <div><div class="stat-number">60+</div><div>Programs</div></div>
+    <div><div class="stat-number">50+</div><div>Partners</div></div>
+  </section>
+
+  <div class="container">
+    <h2 class="section-title">✨ Why Choose Wollega?</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-graduation-cap"></i><h3>Quality Education</h3><p>Accredited programs with modern curriculum</p></div>
+      <div class="card"><i class="fas fa-flask"></i><h3>Research Excellence</h3><p>Leading research centers and innovation hubs</p></div>
+      <div class="card"><i class="fas fa-globe"></i><h3>Global Network</h3><p>International partnerships and exchanges</p></div>
+    </div>
   </div>
-  <div>
-    <div class="stat-number">500+</div>
-    <div>Faculty Members</div>
+
+  <div class="container" style="background:#f1f5f9; border-radius:2rem;">
+    <h2 class="section-title">📅 Upcoming Events</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-calendar-alt"></i><h3>Open Day 2026</h3><p>March 15, 2026 – Campus tour and info session</p></div>
+      <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>Research Conference</h3><p>April 5-7, 2026 – International scholars</p></div>
+      <div class="card"><i class="fas fa-futbol"></i><h3>Inter-University Sports</h3><p>May 20, 2026 – Annual tournament</p></div>
+    </div>
   </div>
-  <div>
-    <div class="stat-number">50+</div>
-    <div>Academic Programs</div>
+</div>
+
+<!-- ==================== ACADEMICS PAGE ==================== -->
+<div id="academicsPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #2b7a4b, #1e3c72);">
+    <h1>📚 Academics at Wollega</h1>
+    <p>Excellence in teaching, learning, and research</p>
   </div>
-  <div>
-    <div class="stat-number">40+</div>
-    <div>Partner Universities</div>
+  <div class="container">
+    <h2 class="section-title">Our Colleges & Schools</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-laptop-code"></i><h3>College of Computing & Informatics</h3><p>CS, IT, Data Science, AI</p></div>
+      <div class="card"><i class="fas fa-microscope"></i><h3>College of Natural Sciences</h3><p>Biology, Chemistry, Physics, Math</p></div>
+      <div class="card"><i class="fas fa-chart-line"></i><h3>College of Business & Economics</h3><p>Accounting, Management, Economics</p></div>
+      <div class="card"><i class="fas fa-heartbeat"></i><h3>College of Health Sciences</h3><p>Medicine, Nursing, Public Health</p></div>
+      <div class="card"><i class="fas fa-gavel"></i><h3>School of Law</h3><p>LLB, Legal Studies</p></div>
+      <div class="card"><i class="fas fa-tractor"></i><h3>College of Agriculture</h3><p>Agronomy, Animal Science, Horticulture</p></div>
+    </div>
   </div>
-</section>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">📖 Academic Calendar 2025/26</h2>
+    <div class="grid-3">
+      <div class="card"><h3>📅 Registration</h3><p>Sept 1-15, 2025</p></div>
+      <div class="card"><h3>📝 Semester 1</h3><p>Sept 20 - Jan 15</p></div>
+      <div class="card"><h3>📚 Semester 2</h3><p>Feb 10 - June 10</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ADMISSIONS PAGE ==================== -->
+<div id="admissionsPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #1e3c72, #2b7a4b);">
+    <h1>🎓 Admissions</h1>
+    <p>Your journey to excellence starts here</p>
+  </div>
+  <div class="container">
+    <h2 class="section-title">Application Requirements</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-file-alt"></i><h3>Undergraduate</h3><p>High school diploma, entrance exam, English proficiency</p></div>
+      <div class="card"><i class="fas fa-scroll"></i><h3>Graduate</h3><p>Bachelor's degree, transcripts, recommendation letters</p></div>
+      <div class="card"><i class="fas fa-passport"></i><h3>International</h3><p>Valid passport, visa, equivalency certificate</p></div>
+    </div>
+  </div>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">💰 Fees & Scholarships</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-money-bill-wave"></i><h3>Tuition Fees</h3><p>Undergraduate: 15,000-25,000 ETB/year<br>Graduate: 20,000-35,000 ETB/year</p></div>
+      <div class="card"><i class="fas fa-trophy"></i><h3>Merit Scholarships</h3><p>Top 5% students - 50% tuition waiver</p></div>
+      <div class="card"><i class="fas fa-hand-holding-usd"></i><h3>Need-Based Aid</h3><p>Financial assistance for eligible students</p></div>
+    </div>
+  </div>
+  <div style="text-align:center; padding:2rem;">
+    <button class="btn-primary" onclick="showPage('contact')">Request Info →</button>
+  </div>
+</div>
+
+<!-- ==================== RESEARCH PAGE ==================== -->
+<div id="researchPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #2b7a4b, #1e3c72);">
+    <h1>🔬 Research & Innovation</h1>
+    <p>Advancing knowledge, solving real-world problems</p>
+  </div>
+  <div class="container">
+    <h2 class="section-title">Research Centers</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-robot"></i><h3>AI & Data Science Center</h3><p>Machine learning, computer vision, big data analytics</p></div>
+      <div class="card"><i class="fas fa-leaf"></i><h3>Climate & Environment Institute</h3><p>Sustainability, renewable energy, climate adaptation</p></div>
+      <div class="card"><i class="fas fa-microscope"></i><h3>Biotechnology Lab</h3><p>Genetic research, crop improvement, pharmaceuticals</p></div>
+    </div>
+  </div>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">📄 Recent Publications</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Nature (2025)</h3><p>"Climate resilience in Ethiopian highlands"</p></div>
+      <div class="card"><h3>IEEE Xplore (2026)</h3><p>"Deep learning for Amharic NLP"</p></div>
+      <div class="card"><h3>African Journal of Agriculture</h3><p>"Sustainable farming practices"</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAMPUS LIFE PAGE ==================== -->
+<div id="campusPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #1e3c72, #2b7a4b);">
+    <h1>🏫 Campus Life</h1>
+    <p>Vibrant, inclusive, and engaging community</p>
+  </div>
+  <div class="container">
+    <h2 class="section-title">Facilities & Services</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-book"></i><h3>Library</h3><p>50,000+ books, digital resources, 24/7 study areas</p></div>
+      <div class="card"><i class="fas fa-dumbbell"></i><h3>Sports Complex</h3><p>Gym, football field, basketball courts, swimming pool</p></div>
+      <div class="card"><i class="fas fa-home"></i><h3>Student Housing</h3><p>On-campus dorms, off-campus apartments</p></div>
+    </div>
+  </div>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">🎉 Student Clubs & Organizations</h2>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-code"></i><h3>Tech Club</h3><p>Hackathons, coding workshops, tech talks</p></div>
+      <div class="card"><i class="fas fa-music"></i><h3>Music & Arts</h3><p>Band, choir, drama, art exhibitions</p></div>
+      <div class="card"><i class="fas fa-hands-helping"></i><h3>Volunteer Network</h3><p>Community service, outreach programs</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ABOUT PAGE ==================== -->
+<div id="aboutPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #2b7a4b, #1e3c72);">
+    <h1>📖 About Wollega University</h1>
+    <p>Excellence, Integrity, Service</p>
+  </div>
+  <div class="container">
+    <div class="card" style="margin-bottom:2rem;">
+      <h3>🏛 Our History</h3>
+      <p>Founded in 2007, Wollega University has grown into one of Ethiopia's premier institutions of higher learning. With a commitment to academic excellence and community development, we have educated thousands of leaders, innovators, and change-makers.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-eye"></i><h3>Mission</h3><p>To provide quality education, conduct impactful research, and serve our community.</p></div>
+      <div class="card"><i class="fas fa-chart-line"></i><h3>Vision</h3><p>To be a center of excellence in Africa by 2030.</p></div>
+      <div class="card"><i class="fas fa-gem"></i><h3>Values</h3><p>Integrity, Innovation, Inclusivity, Excellence</p></div>
+    </div>
+  </div>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">👥 University Leadership</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Dr. Tadese Merga</h3><p>President</p></div>
+      <div class="card"><h3>Prof. Almaz Bekele</h3><p>Vice President, Academic Affairs</p></div>
+      <div class="card"><h3>Dr. Lemma Feyisa</h3><p>Vice President, Research</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<div id="contactPage" class="page-section">
+  <div class="hero" style="background: linear-gradient(135deg, #1e3c72, #2b7a4b);">
+    <h1>📞 Contact Us</h1>
+    <p>We're here to help</p>
+  </div>
+  <div class="container">
+    <div class="grid-3">
+      <div class="card"><i class="fas fa-map-marker-alt"></i><h3>Main Campus</h3><p>Nekemte, Oromia, Ethiopia</p></div>
+      <div class="card"><i class="fas fa-phone"></i><h3>Phone</h3><p>+251-57-661-1234</p></div>
+      <div class="card"><i class="fas fa-envelope"></i><h3>Email</h3><p>info@wollegauniversity.edu.et</p></div>
+    </div>
+  </div>
+  <div class="container" style="background:#f1f5f9;">
+    <h2 class="section-title">📋 Department Contacts</h2>
+    <div class="grid-3">
+      <div class="card"><h3>Admissions</h3><p>admissions@wollega.edu.et<br>+251-57-661-1235</p></div>
+      <div class="card"><h3>Registrar</h3><p>registrar@wollega.edu.et<br>+251-57-661-1236</p></div>
+      <div class="card"><h3>Research Office</h3><p>research@wollega.edu.et<br>+251-57-661-1237</p></div>
+    </div>
+  </div>
+</div>
 
 <footer>
-  <p>📍 Nekemte, Ethiopia | 📞 +251-57-661-1234 | ✉️ info@wollegauniversity.edu.et</p>
-  <p style="margin-top: 1rem;">© 2026 Wollega University - Ultra Edition | Powered by MongoDB</p>
+  <div class="footer-grid">
+    <div>
+      <h4>Quick Links</h4>
+      <a onclick="showPage('academics')">Academics</a>
+      <a onclick="showPage('admissions')">Admissions</a>
+      <a onclick="showPage('research')">Research</a>
+      <a onclick="showPage('campus')">Campus Life</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="#">Library</a>
+      <a href="#">E-Learning</a>
+      <a href="#">Student Portal</a>
+      <a href="#">Staff Portal</a>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>© 2026 Wollega University – Ultra Edition | All Rights Reserved</p>
+  </div>
 </footer>
 
 <script>
-  // IMPORTANT: Replace with your actual Render backend URL
-  const BACKEND_URL = 'https://wollega-university.onrender.com';
+  // REPLACE WITH YOUR RENDER BACKEND URL
+  const BACKEND_URL = 'https://YOUR-BACKEND-URL.onrender.com';
+  
+  function showPage(pageName) {
+    document.querySelectorAll('.page-section').forEach(section => {
+      section.classList.remove('active');
+    });
+    document.getElementById(pageName + 'Page').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   
   async function loadNews() {
     const newsGrid = document.getElementById('newsGrid');
-    
+    if (!newsGrid) return;
     try {
-      const response = await fetch(`${BACKEND_URL}/api/news`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const news = await response.json();
-      
+      const res = await fetch(`${BACKEND_URL}/api/news`);
+      const news = await res.json();
       if (news.length === 0) {
-        newsGrid.innerHTML = '<div class="error">No news articles found. Add some via MongoDB!</div>';
+        newsGrid.innerHTML = '<div class="loading">No news yet. Add some via MongoDB.</div>';
         return;
       }
-      
-      newsGrid.innerHTML = news.map(article => `
+      newsGrid.innerHTML = news.map(n => `
         <div class="news-card">
-          <div class="news-content">
-            <span class="news-category">${escapeHtml(article.category || 'General')}</span>
-            <h3>${escapeHtml(article.title)}</h3>
-            <p class="news-summary">${escapeHtml(article.summary)}</p>
-            <div class="news-date">
-              📅 ${new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </div>
-          </div>
+          <span class="news-category">${n.category || 'General'}</span>
+          <h3>${escapeHtml(n.title)}</h3>
+          <p>${escapeHtml(n.summary)}</p>
+          <small style="color:#2b7a4b;">📅 ${new Date(n.date).toLocaleDateString()}</small>
         </div>
       `).join('');
-      
-    } catch (error) {
-      console.error('Error loading news:', error);
-      newsGrid.innerHTML = `
-        <div class="error">
-          ⚠️ Failed to load news from backend.<br>
-          <small>Make sure your backend is running at ${BACKEND_URL}</small>
-        </div>
-      `;
+    } catch(err) {
+      newsGrid.innerHTML = '<div class="loading">⚠️ Backend connection failed</div>';
     }
   }
   
-  function escapeHtml(text) {
+  function escapeHtml(str) {
     const div = document.createElement('div');
-    div.textContent = text;
+    div.textContent = str;
     return div.innerHTML;
   }
   
-  // Load news when page loads
   loadNews();
-  
-  // Refresh news every 30 seconds
-  setInterval(loadNews, 30000);
+  setInterval(loadNews, 60000);
 </script>
-
 </body>
-</html>
+                                            </html>
