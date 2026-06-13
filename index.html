@@ -4,32 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wollega University | Ultra Edition</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background: #f8fafc;
       color: #0f172a;
     }
-    /* glass navbar */
+
     .navbar {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.95);
       border-bottom: 1px solid #e2e8f0;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      gap: 1rem;
       z-index: 1000;
     }
+
     .logo h1 {
       font-size: 1.8rem;
       font-weight: 800;
@@ -38,112 +41,179 @@
       -webkit-background-clip: text;
       color: transparent;
     }
+
+    .logo p {
+      font-size: 0.75rem;
+      color: #475569;
+    }
+
     .nav-links {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
+
     .nav-links a {
       text-decoration: none;
       font-weight: 600;
       color: #1e293b;
+      transition: 0.3s;
     }
-    .nav-links a:hover { color: #2b7a4b; }
-    /* hero */
+
+    .nav-links a:hover {
+      color: #2b7a4b;
+    }
+
     .hero {
-      min-height: 85vh;
-      background: linear-gradient(107deg, #eef2ff 0%, #d9e6f2 100%);
-      display: flex;
-      align-items: center;
-      padding: 3rem 2rem;
-    }
-    .hero-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
-    }
-    .hero-text { flex: 1; }
-    .hero-text .badge {
-      background: #2b7a4b20;
-      color: #1e5a3a;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .hero-text h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin: 1rem 0;
-      background: linear-gradient(120deg, #0b2b26, #1e4a3b);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .btn-primary {
-      background: #0f2b2d;
+      background: linear-gradient(135deg, #1e3c72 0%, #2b7a4b 100%);
       color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 600;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    .btn-primary {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      background: white;
+      color: #1e3c72;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    .hero-image { flex: 1; text-align: center; }
-    .hero-image img {
-      max-width: 100%;
-      border-radius: 2rem;
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    /* news section */
-    .section {
+
+    .news-section {
       max-width: 1280px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
+
     .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2.5rem;
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
+      color: #0f172a;
     }
+
     .news-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
+
     .news-card {
       background: white;
-      border-radius: 1.5rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-content {
       padding: 1.5rem;
-      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-      transition: transform 0.2s;
     }
-    .news-card:hover { transform: translateY(-5px); }
-    .news-card h3 { margin-bottom: 0.5rem; }
+
+    .news-category {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #e0e7ff;
+      color: #4338ca;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .news-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .news-summary {
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
     .news-date {
-      color: #2b7a4b;
       font-size: 0.8rem;
-      margin-top: 1rem;
-      display: block;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.2rem;
+      color: #2b7a4b;
+    }
+
+    .error {
+      text-align: center;
+      padding: 3rem;
+      color: #dc2626;
+    }
+
+    .stats {
+      background: #1e293b;
+      color: white;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+
     footer {
       background: #0f172a;
-      color: #e2e8f0;
+      color: #94a3b8;
       text-align: center;
-      padding: 3rem 2rem;
-      margin-top: 2rem;
+      padding: 2rem;
     }
+
     @media (max-width: 768px) {
-      .hero-text h1 { font-size: 2.2rem; }
-      .navbar { flex-direction: column; gap: 1rem; }
-      .nav-links { gap: 1rem; }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -152,74 +222,111 @@
 <nav class="navbar">
   <div class="logo">
     <h1>Wollega University</h1>
-    <p style="font-size:0.8rem;">Ultra Edition | Excellence in Ethiopia</p>
+    <p>Ultra Edition | Excellence in Education</p>
   </div>
   <ul class="nav-links">
     <li><a href="#">Home</a></li>
     <li><a href="#">Academics</a></li>
+    <li><a href="#">Admissions</a></li>
     <li><a href="#">Research</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
 </nav>
 
 <section class="hero">
-  <div class="hero-container">
-    <div class="hero-text">
-      <span class="badge">✨ Ultra Vision 2030</span>
-      <h1>Shape Tomorrow <br>With Excellence</h1>
-      <p style="color:#334155; margin:1rem 0; max-width:500px;">World‑class education, research, and community impact in the heart of Ethiopia.</p>
-      <a href="#" class="btn-primary">Apply Now →</a>
-    </div>
-    <div class="hero-image">
-      <img src="https://placehold.co/600x400/eef2ff/2b7a4b?text=Campus+Ultra" alt="Campus">
-    </div>
+  <h1>Shape Your Future at Wollega University</h1>
+  <p>Experience world-class education, cutting-edge research, and a vibrant campus life in the heart of Ethiopia.</p>
+  <a href="#" class="btn-primary">Apply Now →</a>
+</section>
+
+<section class="news-section">
+  <h2 class="section-title">📰 Latest News & Updates</h2>
+  <div id="newsGrid" class="news-grid">
+    <div class="loading">Loading latest news from MongoDB...</div>
   </div>
 </section>
 
-<section class="section">
-  <h2 class="section-title">📰 Latest News</h2>
-  <div id="newsContainer" class="news-grid">
-    <div style="text-align:center; grid-column:1/-1;">Loading news from MongoDB...</div>
+<section class="stats">
+  <div>
+    <div class="stat-number">10,000+</div>
+    <div>Students</div>
+  </div>
+  <div>
+    <div class="stat-number">500+</div>
+    <div>Faculty Members</div>
+  </div>
+  <div>
+    <div class="stat-number">50+</div>
+    <div>Academic Programs</div>
+  </div>
+  <div>
+    <div class="stat-number">40+</div>
+    <div>Partner Universities</div>
   </div>
 </section>
 
 <footer>
   <p>📍 Nekemte, Ethiopia | 📞 +251-57-661-1234 | ✉️ info@wollegauniversity.edu.et</p>
-  <p style="margin-top:1rem;">© 2026 Wollega University – Ultra Edition | Powered by MongoDB</p>
+  <p style="margin-top: 1rem;">© 2026 Wollega University - Ultra Edition | Powered by MongoDB</p>
 </footer>
 
 <script>
-  async function fetchNews() {
+  // IMPORTANT: Replace with your actual Render backend URL
+  const BACKEND_URL = 'https://YOUR-BACKEND-URL.onrender.com';
+  
+  async function loadNews() {
+    const newsGrid = document.getElementById('newsGrid');
+    
     try {
-      const res = await fetch('/api/news');
-      if (!res.ok) throw new Error('Network error');
-      const news = await res.json();
-      const container = document.getElementById('newsContainer');
+      const response = await fetch(`${BACKEND_URL}/api/news`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const news = await response.json();
+      
       if (news.length === 0) {
-        container.innerHTML = '<div style="grid-column:1/-1; text-align:center;">No news yet. Add some via MongoDB.</div>';
+        newsGrid.innerHTML = '<div class="error">No news articles found. Add some via MongoDB!</div>';
         return;
       }
-      container.innerHTML = news.map(item => `
+      
+      newsGrid.innerHTML = news.map(article => `
         <div class="news-card">
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.summary || item.title)}</p>
-          <small class="news-date">${new Date(item.date).toLocaleDateString()}</small>
+          <div class="news-content">
+            <span class="news-category">${escapeHtml(article.category || 'General')}</span>
+            <h3>${escapeHtml(article.title)}</h3>
+            <p class="news-summary">${escapeHtml(article.summary)}</p>
+            <div class="news-date">
+              📅 ${new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </div>
+          </div>
         </div>
       `).join('');
-    } catch (err) {
-      document.getElementById('newsContainer').innerHTML = '<div style="grid-column:1/-1; text-align:center; color:red;">Failed to load news. Make sure backend is running.</div>';
-      console.error(err);
+      
+    } catch (error) {
+      console.error('Error loading news:', error);
+      newsGrid.innerHTML = `
+        <div class="error">
+          ⚠️ Failed to load news from backend.<br>
+          <small>Make sure your backend is running at ${BACKEND_URL}</small>
+        </div>
+      `;
     }
   }
-  function escapeHtml(str) {
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
+  
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
-  fetchNews();
+  
+  // Load news when page loads
+  loadNews();
+  
+  // Refresh news every 30 seconds
+  setInterval(loadNews, 30000);
 </script>
+
 </body>
 </html>
